@@ -6,7 +6,7 @@ module.exports = {
     devtool: 'source-map',
     entry: {
         'bundle': ['./src/index.js'],
-        'truncate-text': ['./src/TruncateText.js']
+        'react-text-truncate': ['./src/TextTruncate.js']
     },
     output: {
         path: path.join(__dirname, 'build'),
