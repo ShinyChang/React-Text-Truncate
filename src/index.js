@@ -1,5 +1,5 @@
 import React from 'react';
-import TextTruncate from './TruncateText';
+import TextTruncate from './TextTruncate';
 
 class App extends React.Component {
     constructor(props) {

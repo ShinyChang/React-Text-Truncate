@@ -1,5 +1,5 @@
 {
-    "name": "truncate-text",
+    "name": "react-truncate-text",
     "version": "0.1.0",
     "description": "Truncate text for React.js",
     "main": "./build/index.js",
@@ -9,7 +9,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/ShinyChang/TruncateText.git"
+        "url": "git+https://github.com/ShinyChang/react-truncate-text.git"
     },
     "tags": [
         "react",
@@ -18,9 +18,9 @@
     "author": "ShinyChang <ublue724@gmail.com>",
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/ShinyChang/TruncateText/issues"
+        "url": "https://github.com/ShinyChang/react-truncate-text/issues"
     },
-    "homepage": "https://github.com/ShinyChang/TruncateText#readme",
+    "homepage": "https://github.com/ShinyChang/react-truncate-text#readme",
     "devDependencies": {
         "babel": "^5.8.23",
         "babel-core": "^5.8.25",
