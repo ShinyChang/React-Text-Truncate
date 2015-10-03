@@ -1,25 +1,25 @@
-import React from 'react';
+import React, {Component} from 'react';
 
-export default class TextTruncate extends React.Component {
+export default class TextTruncate extends Component {
     static propTypes = {
         text: React.PropTypes.string,
         truncateText: React.PropTypes.string,
         line: React.PropTypes.number,
-        title: React.PropTypes.bool
+        showTitle: React.PropTypes.bool
     };
 
     static defaultProps = {
         text: '',
-        truncateText: '...',
+        truncateText: '…',
         line: 1,
-        title: true
+        showTitle: true
     };
 
     componentWillMount() {
         let canvas = document.createElement('canvas');
         let docFragment = document.createDocumentFragment();
         docFragment.appendChild(canvas);
-        this.canvas = canvas.getContext("2d");
+        this.canvas = canvas.getContext('2d');
     }
     componentDidMount() {
         this.scope = React.findDOMNode(this.refs.scope);
@@ -53,12 +53,12 @@ export default class TextTruncate extends React.Component {
             let startPos = 0;
             let line = this.props.line;
             while(line--) {
-                let ext = line ? "" : this.props.truncateText;
+                let ext = line ? '' : this.props.truncateText;
                 while(n <= max) {
                     n++;
                     text = this.props.text.substr(startPos, n);
                     if (this.measureWidth(text + ext) > scopeWidth) {
-                        splitPos = text.lastIndexOf(" ");
+                        splitPos = text.lastIndexOf(' ');
                         if (splitPos === -1) {
                             splitPos = n - 1;
                         }
@@ -85,7 +85,7 @@ export default class TextTruncate extends React.Component {
         let attrs = {
             ref: 'scope'
         };
-        if (this.props.title) {
+        if (this.props.showTitle) {
             attrs.title = this.props.text;
         }
 

@@ -1,6 +1,6 @@
 {
     "name": "react-text-truncate",
-    "version": "0.1.3",
+    "version": "0.1.4",
     "description": "Truncate text for React.js",
     "main": "./build/react-text-truncate.js",
     "scripts": {
