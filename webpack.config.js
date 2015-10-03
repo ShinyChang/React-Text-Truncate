@@ -5,8 +5,8 @@ var node_dir = __dirname + '/node_modules';
 module.exports = {
     devtool: 'source-map',
     entry: {
-        'bundle': ['./src/index.js'],
-        'react-text-truncate': ['./src/TextTruncate.js']
+        'bundle': ['./src/index'],
+        'react-text-truncate': ['./src/TextTruncate']
     },
     output: {
         path: path.join(__dirname, 'build'),
@@ -39,7 +39,7 @@ module.exports = {
     module: {
         loaders: [{
             test: /\.jsx?$/,
-            loaders: ['babel?stage=0'],
+            loaders: ['babel'],
             include: path.join(__dirname, 'src')
         }]
     }

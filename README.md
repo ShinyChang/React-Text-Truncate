@@ -15,4 +15,4 @@ npm install react-text-truncate
 	showTitle={true} />
 ```
 
-[Demo](http://shinychang.github.io/react-text-truncate/)
+[Demo](http://shinychang.github.io/React-Text-Truncate/)
