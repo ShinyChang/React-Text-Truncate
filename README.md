@@ -1,5 +1,4 @@
-#TextTruncate
-===
+#React-Truncate-Text
 
 ##Install
 ```
@@ -10,7 +9,7 @@ npm install react-text-truncate
 ```
 <TextTruncate
 	line={1}
-	truncateText="..."
+	truncateText="…"
 	text="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
 	showTitle={true} />
 ```
