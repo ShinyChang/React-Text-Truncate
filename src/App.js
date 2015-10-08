@@ -13,10 +13,10 @@ export class App extends Component {
     }
     handleChange = (e) => {
         this.setState({
-            line: React.findDOMNode(this.refs.line).value << 0,
-            text: React.findDOMNode(this.refs.text).value,
-            truncateText: React.findDOMNode(this.refs.truncateText).value,
-            showTitle: React.findDOMNode(this.refs.showTitle).checked,
+            line: this.refs.line.value << 0,
+            text: this.refs.text.value,
+            truncateText: this.refs.truncateText.value,
+            showTitle: this.refs.showTitle.checked,
         });
     }
     render() {

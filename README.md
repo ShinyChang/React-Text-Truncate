@@ -15,3 +15,8 @@ npm install react-text-truncate
 ```
 
 [Demo](http://shinychang.github.io/React-Text-Truncate/)
+
+
+##Changelog
+* 0.2.0 supoorts React 0.14
+* 0.1.5 supports React 0.13.3 and below
