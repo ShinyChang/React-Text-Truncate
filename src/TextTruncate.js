@@ -22,8 +22,7 @@ export default class TextTruncate extends Component {
         this.canvas = canvas.getContext('2d');
     }
     componentDidMount() {
-        this.scope = React.findDOMNode(this.refs.scope);
-        let style = window.getComputedStyle(this.scope);
+        let style = window.getComputedStyle(this.refs.scope);
         let font = [];
         font.push(style['font-weight']);
         font.push(style['font-style']);
@@ -41,7 +40,7 @@ export default class TextTruncate extends Component {
     getRenderText() {
         let textWidth = this.measureWidth(this.props.text);
         let ellipsisWidth = this.measureWidth(this.props.truncateText);
-        let scopeWidth = this.scope.offsetWidth;
+        let scopeWidth = this.refs.scope.offsetWidth;
 
         if (scopeWidth >= textWidth) {
             return this.props.text;
