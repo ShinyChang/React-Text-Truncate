@@ -5,7 +5,7 @@ export class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            text: '商動同的的都養西評興、即起續了起慢不時不見，角熱吸學長為麼西對自的到，治發言心，水頭期！例源以候王們社成！因才合計溫館常農在願是車一快產自毒春這壓明不體話小話產臉道的入大至升沒區坡園甚家令西家就德果特寫外知？為懷的家，基是院：史生在臺作於，下清雜高對當都質特。分再而一到起說陸常下成決養我日天壓票絕？任的洲票對縣著？太法防；生不才專日太運於麼；雜漸以！南突不人快遠費原體地子這重特風人大來看單來白直出親子重年？',
+            text: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
             line: 2,
             truncateText: '…',
             showTitle: true
@@ -16,7 +16,7 @@ export class App extends Component {
             line: this.refs.line.value << 0,
             text: this.refs.text.value,
             truncateText: this.refs.truncateText.value,
-            showTitle: this.refs.showTitle.checked,
+            showTitle: this.refs.showTitle.checked
         });
     }
     render() {
