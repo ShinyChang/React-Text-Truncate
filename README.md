@@ -18,5 +18,6 @@ npm install react-text-truncate
 
 
 ##Changelog
+* 0.3.4 supports Babel6
 * 0.2.0 supoorts React 0.14
 * 0.1.5 supports React 0.13.3 and below
