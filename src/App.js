@@ -18,7 +18,7 @@ export class App extends Component {
             truncateText: this.refs.truncateText.value,
             showTitle: this.refs.showTitle.checked
         });
-    }
+    };
     render() {
         let props = this.state;
         return (

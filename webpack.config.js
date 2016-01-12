@@ -1,27 +1,17 @@
 var path = require('path');
 var webpack = require('webpack');
-var node_dir = __dirname + '/node_modules';
 
 module.exports = {
     devtool: 'source-map',
-    entry: {
-        'bundle': ['./src/index'],
-        'react-text-truncate': ['./src/TextTruncate']
-    },
+    entry: path.join(__dirname, 'src', 'index'),
     output: {
         path: path.join(__dirname, 'build'),
-        filename: '[name].js'
+        filename: 'bundle.js'
     },
     resolve: {
-        extensions: ['', '.js']
+        extensions: ['', '.js', '.jsx']
     },
     plugins: [
-        new webpack.ProvidePlugin({
-            $: 'jquery',
-            jQuery: 'jquery',
-            'window.jQuery': 'jquery',
-            'root.jQuery': 'jquery'
-        }),
         new webpack.DefinePlugin({
             'process.env': {
                 'NODE_ENV': JSON.stringify('production')
@@ -33,10 +23,6 @@ module.exports = {
             }
         })
     ],
-    externals: {
-        react: 'React',
-        'react-dom': 'ReactDOM',
-    },
     module: {
         loaders: [{
             test: /\.jsx?$/,

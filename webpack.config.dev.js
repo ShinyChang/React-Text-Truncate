@@ -5,7 +5,7 @@ module.exports = {
     devtool: 'eval',
     entry: [
         'webpack-hot-middleware/client',
-        './src/index'
+        path.join(__dirname, 'src', 'index')
     ],
     output: {
         path: path.join(__dirname, 'build'),
@@ -25,8 +25,8 @@ module.exports = {
     },
     module: {
         loaders: [{
-            test: /\.js$/,
-            loaders: ['babel?stage=0'],
+            test: /\.jsx?$/,
+            loaders: ['babel'],
             include: path.join(__dirname, 'src')
         }]
     }
