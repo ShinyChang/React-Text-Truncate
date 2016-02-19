@@ -1,4 +1,4 @@
-#React-Truncate-Text
+#React-Truncate-Text [![npm version](https://badge.fury.io/js/react-text-truncate.svg)](https://badge.fury.io/js/react-text-truncate)
 
 ##Install
 ```
