@@ -1,6 +1,6 @@
 {
   "name": "react-text-truncate",
-  "version": "0.3.5",
+  "version": "0.3.6",
   "description": "Truncate text for React.js",
   "main": "lib/index.js",
   "scripts": {
@@ -28,6 +28,7 @@
     "babel": "^6.1.18",
     "babel-core": "^6.2.1",
     "babel-loader": "^6.2.0",
+    "babel-plugin-add-module-exports": "^0.1.2",
     "babel-plugin-react-transform": "^1.1.1",
     "babel-preset-es2015": "^6.1.18",
     "babel-preset-react": "^6.1.18",

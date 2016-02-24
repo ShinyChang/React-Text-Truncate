@@ -1,11 +1,20 @@
-#React-Truncate-Text
+# React-Truncate-Text [![npm version](https://badge.fury.io/js/react-text-truncate.svg)](https://badge.fury.io/js/react-text-truncate)
 
-##Install
+## Install
+
 ```
 npm install react-text-truncate
 ```
 
-##Markup
+## Usage
+
+```
+import TextTruncate from 'react-text-truncate'; // recommend
+var TextTruncate = require('react-text-truncate'); // CommonJS or UMD
+```
+
+## Markup
+
 ```
 <TextTruncate
 	line={1}
@@ -17,7 +26,8 @@ npm install react-text-truncate
 [Demo](http://shinychang.github.io/React-Text-Truncate/)
 
 
-##Changelog
+## Changelog
+* 0.3.6 Support CommonJS and UMD module loader
 * 0.3.5 Fix window resize issue
 * 0.3.4 supports Babel6
 * 0.2.0 supoorts React 0.14
