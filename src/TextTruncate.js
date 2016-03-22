@@ -5,7 +5,8 @@ export default class TextTruncate extends Component {
         text: React.PropTypes.string,
         truncateText: React.PropTypes.string,
         line: React.PropTypes.number,
-        showTitle: React.PropTypes.bool
+        showTitle: React.PropTypes.bool,
+        textTruncateChild: React.PropTypes.node
     };
 
     static defaultProps = {
@@ -97,7 +98,10 @@ export default class TextTruncate extends Component {
         }
 
         return (
-            <div {...attrs}>{text}</div>
+            <div>
+                <div {...attrs}>{text}</div>
+                {this.props.textTruncateChild}
+            </div>
         );
     }
 };
