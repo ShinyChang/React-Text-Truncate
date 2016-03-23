@@ -16,10 +16,6 @@ export default class TextTruncate extends Component {
         showTitle: true
     };
 
-    constructor() {
-        super();
-        this.onResize = this.onResize.bind(this);
-    }
     componentWillMount() {
         let canvas = document.createElement('canvas');
         let docFragment = document.createDocumentFragment();
@@ -35,14 +31,33 @@ export default class TextTruncate extends Component {
         font.push(style['font-family']);
         this.canvas.font = font.join(' ');
         this.forceUpdate();
-        window.addEventListener('resize', this.onResize);
+
+        if (this.props.raf) {
+          this.loopId = window.requestAnimationFrame(this.animationStep);
+        } else {
+          window.addEventListener('resize', this.onResize);
+        }
     }
     componentWillUnmount() {
-        window.removeEventListener('resize', this.onResize);
+        if (this.props.raf) {
+            window.cancelAnimationFrame(this.loopId);
+        } else {
+            window.removeEventListener('resize', this.onResize);
+        }
     }
-    onResize() {
+    animationStep = timeStamp => {
+        if ((timeStamp - this.lastTime) < 150) {
+          this.loopId = window.requestAnimationFrame(this.animationStep);
+          return;
+        }
+
+        this.lastTime = timeStamp;
+        this.onResize();
+        this.loopId = window.requestAnimationFrame(this.animationStep);
+    };
+    onResize = () => {
         this.forceUpdate();
-    }
+    };
     measureWidth(text) {
         return this.canvas.measureText(text).width;
     }
