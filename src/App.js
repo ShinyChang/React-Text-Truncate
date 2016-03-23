@@ -8,7 +8,8 @@ export class App extends Component {
             text: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
             line: 2,
             truncateText: '…',
-            showTitle: true
+            showTitle: true,
+            textTruncateChild: <a className='pull-right'>show more</a>
         };
     }
     handleChange = (e) => {
@@ -16,7 +17,8 @@ export class App extends Component {
             line: this.refs.line.value << 0,
             text: this.refs.text.value,
             truncateText: this.refs.truncateText.value,
-            showTitle: this.refs.showTitle.checked
+            showTitle: this.refs.showTitle.checked,
+
         });
     };
     render() {
