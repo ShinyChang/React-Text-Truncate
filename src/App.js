@@ -9,20 +9,45 @@ export class App extends Component {
             line: 2,
             truncateText: '…',
             showTitle: true,
-            textTruncateChild: <a className='pull-right'>show more</a>
+            textTruncateChild: <a className='pull-right' onClick={this.showAll}>show more</a>,
+            showAll: false
         };
     }
+
     handleChange = (e) => {
         this.setState({
             line: this.refs.line.value << 0,
             text: this.refs.text.value,
             truncateText: this.refs.truncateText.value,
-            showTitle: this.refs.showTitle.checked,
-
+            showTitle: this.refs.showTitle.checked
         });
     };
+
+    showAll = () => {
+        this.setState({
+            showAll: true
+        });
+    };
+
+    noShowAll = () => {
+        this.setState({
+            showAll: false
+        });
+    }
+
     render() {
-        let props = this.state;
+        const {showAll, ...props} = this.state;
+        let text;
+        if (showAll) {
+            text = (
+                <div>
+                    {props.text}
+                    <a className='pull-right' onClick={this.noShowAll}>Hide</a>
+                </div>
+            );
+        } else {
+            text = <TextTruncate {...props}/>
+        }
         return (
             <div>
                 <div className='form-group'>
@@ -44,7 +69,7 @@ export class App extends Component {
                 </div>
                 <div className='form-group sample'>
                     <label>Result</label>
-                    <TextTruncate {...props} />
+                    {text}
                 </div>
             </div>
         )
