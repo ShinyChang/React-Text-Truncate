@@ -8,9 +8,13 @@ export class App extends Component {
             text: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
             line: 2,
             truncateText: '…',
-            showTitle: true
+            showTitle: true,
+            textTruncateChild: <a className='pull-right' onClick={this.showAll}>show more</a>,
+            showAll: false,
+            raf: true
         };
     }
+
     handleChange = (e) => {
         this.setState({
             line: this.refs.line.value << 0,
@@ -19,8 +23,32 @@ export class App extends Component {
             showTitle: this.refs.showTitle.checked
         });
     };
+
+    showAll = () => {
+        this.setState({
+            showAll: true
+        });
+    };
+
+    noShowAll = () => {
+        this.setState({
+            showAll: false
+        });
+    }
+
     render() {
-        let props = this.state;
+        const {showAll, ...props} = this.state;
+        let text;
+        if (showAll) {
+            text = (
+                <div>
+                    {props.text}
+                    <a className='pull-right' onClick={this.noShowAll}>Hide</a>
+                </div>
+            );
+        } else {
+            text = <TextTruncate {...props}/>
+        }
         return (
             <div>
                 <div className='form-group'>
@@ -42,7 +70,7 @@ export class App extends Component {
                 </div>
                 <div className='form-group sample'>
                     <label>Result</label>
-                    <TextTruncate {...props} />
+                    {text}
                 </div>
             </div>
         )
