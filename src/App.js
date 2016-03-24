@@ -10,7 +10,8 @@ export class App extends Component {
             truncateText: '…',
             showTitle: true,
             textTruncateChild: <a className='pull-right' onClick={this.showAll}>show more</a>,
-            showAll: false
+            showAll: false,
+            raf: true
         };
     }
 
