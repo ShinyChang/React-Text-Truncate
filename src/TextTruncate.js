@@ -6,14 +6,16 @@ export default class TextTruncate extends Component {
         truncateText: React.PropTypes.string,
         line: React.PropTypes.number,
         showTitle: React.PropTypes.bool,
-        textTruncateChild: React.PropTypes.node
+        textTruncateChild: React.PropTypes.node,
+        raf: React.PropTypes.bool
     };
 
     static defaultProps = {
         text: '',
         truncateText: '…',
         line: 1,
-        showTitle: true
+        showTitle: true,
+        raf: true
     };
 
     componentWillMount() {
@@ -22,6 +24,7 @@ export default class TextTruncate extends Component {
         docFragment.appendChild(canvas);
         this.canvas = canvas.getContext('2d');
     }
+
     componentDidMount() {
         let style = window.getComputedStyle(this.refs.scope);
         let font = [];
@@ -38,6 +41,7 @@ export default class TextTruncate extends Component {
           window.addEventListener('resize', this.onResize);
         }
     }
+
     componentWillUnmount() {
         if (this.props.raf) {
             window.cancelAnimationFrame(this.loopId);
@@ -45,22 +49,26 @@ export default class TextTruncate extends Component {
             window.removeEventListener('resize', this.onResize);
         }
     }
-    animationStep = timeStamp => {
+
+    animationStep = (timeStamp) => {
         if ((timeStamp - this.lastTime) < 150) {
-          this.loopId = window.requestAnimationFrame(this.animationStep);
-          return;
+            this.loopId = window.requestAnimationFrame(this.animationStep);
+            return;
         }
 
         this.lastTime = timeStamp;
         this.onResize();
         this.loopId = window.requestAnimationFrame(this.animationStep);
     };
+
     onResize = () => {
         this.forceUpdate();
     };
+
     measureWidth(text) {
         return this.canvas.measureText(text).width;
     }
+
     getRenderText() {
         let textWidth = this.measureWidth(this.props.text);
         let ellipsisWidth = this.measureWidth(this.props.truncateText);
@@ -100,6 +108,7 @@ export default class TextTruncate extends Component {
                       : this.props.text.substr(0, startPos - 1) + this.props.truncateText;
         }
     }
+
     render() {
         let text = '';
         if (this.refs.scope) {

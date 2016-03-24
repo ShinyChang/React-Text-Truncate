@@ -20,13 +20,16 @@ var TextTruncate = require('react-text-truncate'); // CommonJS or UMD
 	line={1}
 	truncateText="…"
 	text="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
-	showTitle={true} />
+	showTitle={true}
+    raf={true}
+    />
 ```
 
 [Demo](http://shinychang.github.io/React-Text-Truncate/)
 
 
 ## Changelog
+* 0.5.0 Add request animation frame
 * 0.4.0 New property `textTruncateChild` for show more or others.
 * 0.3.7 Support CommonJS and UMD module loader
 * 0.3.5 Fix window resize issue
