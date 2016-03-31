@@ -29,8 +29,9 @@ var TextTruncate = require('react-text-truncate'); // CommonJS or UMD
 
 
 ## Changelog
+* 0.5.1 Hide `textTruncateChild` when nothing truncated
 * 0.5.0 Add request animation frame
-* 0.4.0 New property `textTruncateChild` for show more or others.
+* 0.4.0 New property `textTruncateChild` for show more or others
 * 0.3.7 Support CommonJS and UMD module loader
 * 0.3.5 Fix window resize issue
 * 0.3.4 supports Babel6

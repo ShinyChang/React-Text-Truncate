@@ -124,7 +124,7 @@ export default class TextTruncate extends Component {
         return (
             <div>
                 <div {...attrs}>{text}</div>
-                {this.props.text == text ? null : this.props.textTruncateChild}
+                {this.props.text === text ? null : this.props.textTruncateChild}
             </div>
         );
     }
