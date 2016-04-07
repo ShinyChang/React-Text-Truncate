@@ -18,21 +18,19 @@ export default class TextTruncate extends Component {
         raf: true
     };
 
-    componentWillMount() {
+    componentDidMount() {
         let canvas = document.createElement('canvas');
         let docFragment = document.createDocumentFragment();
+        let style = window.getComputedStyle(this.refs.scope);
+        let font = [
+            style['font-weight'],
+            style['font-style'],
+            style['font-size'],
+            style['font-family']
+        ].join(' ');
         docFragment.appendChild(canvas);
         this.canvas = canvas.getContext('2d');
-    }
-
-    componentDidMount() {
-        let style = window.getComputedStyle(this.refs.scope);
-        let font = [];
-        font.push(style['font-weight']);
-        font.push(style['font-style']);
-        font.push(style['font-size']);
-        font.push(style['font-family']);
-        this.canvas.font = font.join(' ');
+        this.canvas.font = font;
         this.forceUpdate();
 
         if (this.props.raf) {
