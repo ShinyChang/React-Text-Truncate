@@ -25,6 +25,8 @@
   },
   "homepage": "https://github.com/ShinyChang/react-text-truncate",
   "devDependencies": {
+    "react": "^0.14.7",
+    "react-dom": "^0.14.7",
     "babel-cli": "^6.5.2",
     "babel-core": "^6.7.4",
     "babel-loader": "^6.2.4",
@@ -43,11 +45,7 @@
     "webpack-hot-middleware": "^2.10.0"
   },
   "peerDependencies": {
-    "react": "^0.14.7",
-    "react-dom": "^0.14.7"
-  },
-  "dependencies": {
-    "react": "^0.14.7",
-    "react-dom": "^0.14.7"
+    "react": "^0.14.7 || ^15.0.0",
+    "react-dom": "^0.14.7 || ^15.0.0"
   }
 }
