@@ -1,6 +1,6 @@
 {
   "name": "react-text-truncate",
-  "version": "0.5.2",
+  "version": "0.6.0",
   "description": "Truncate text for React.js",
   "main": "lib/index.js",
   "scripts": {
@@ -25,10 +25,8 @@
   },
   "homepage": "https://github.com/ShinyChang/react-text-truncate",
   "devDependencies": {
-    "react": "^0.14.7",
-    "react-dom": "^0.14.7",
-    "babel-cli": "^6.5.2",
-    "babel-core": "^6.7.4",
+    "babel-cli": "^6.7.5",
+    "babel-core": "^6.7.6",
     "babel-loader": "^6.2.4",
     "babel-plugin-add-module-exports": "^0.1.2",
     "babel-plugin-react-transform": "^2.0.2",
@@ -37,11 +35,13 @@
     "babel-preset-react": "^6.5.0",
     "babel-preset-stage-0": "^6.5.0",
     "express": "^4.13.4",
+    "react": "^15.0.1",
+    "react-dom": "^15.0.1",
     "react-transform-catch-errors": "^1.0.2",
     "react-transform-hmr": "^1.0.4",
-    "redbox-react": "^1.2.2",
-    "webpack": "^1.12.14",
-    "webpack-dev-middleware": "^1.5.1",
+    "redbox-react": "^1.2.3",
+    "webpack": "^1.12.15",
+    "webpack-dev-middleware": "^1.6.1",
     "webpack-hot-middleware": "^2.10.0"
   },
   "peerDependencies": {

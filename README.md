@@ -29,6 +29,7 @@ var TextTruncate = require('react-text-truncate'); // CommonJS or UMD
 
 
 ## Changelog
+* 0.6.0 Support React 15
 * 0.5.2 Fix server render bug
 * 0.5.1 Hide `textTruncateChild` when nothing truncated
 * 0.5.0 Add request animation frame
