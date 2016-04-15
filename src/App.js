@@ -9,8 +9,7 @@ export class App extends Component {
             line: 2,
             truncateText: '…',
             showTitle: true,
-            textTruncateChild: <a className='pull-right' onClick={this.showAll}>show more</a>,
-            showAll: false,
+            appendTextTruncateChild: true,
             raf: true
         };
     }
@@ -20,57 +19,64 @@ export class App extends Component {
             line: this.refs.line.value << 0,
             text: this.refs.text.value,
             truncateText: this.refs.truncateText.value,
-            showTitle: this.refs.showTitle.checked
+            showTitle: this.refs.showTitle.checked,
+            appendTextTruncateChild: this.refs.appendTextTruncateChild.checked
         });
     };
-
-    showAll = () => {
-        this.setState({
-            showAll: true
-        });
-    };
-
-    noShowAll = () => {
-        this.setState({
-            showAll: false
-        });
-    }
 
     render() {
-        const {showAll, ...props} = this.state;
-        let text;
-        if (showAll) {
-            text = (
-                <div>
-                    {props.text}
-                    <a className='pull-right' onClick={this.noShowAll}>Hide</a>
-                </div>
+        const {
+            appendTextTruncateChild,
+            ...props
+        } = this.state;
+
+        if (appendTextTruncateChild) {
+            props.textTruncateChild = (
+                <a href='#'>Read On</a>
             );
-        } else {
-            text = <TextTruncate {...props}/>
         }
+
         return (
-            <div>
-                <div className='form-group'>
-                    <label htmlFor='line'>Line</label>
-                    <input className='form-control' id='line' ref='line' onChange={this.handleChange} type='number' value={this.state.line} min={1} required/>
+            <div className='row'>
+                <div className='col-md-6 col-xs-12'>
+                    <div className='form-group'>
+                        <label htmlFor='line'>Line</label>
+                        <input className='form-control' id='line' ref='line' onChange={this.handleChange} type='number' value={this.state.line} min={1} required/>
+                    </div>
+                    <div className='form-group'>
+                        <label htmlFor='text'>Text</label>
+                        <textarea className='form-control' id='text' ref='text' onChange={this.handleChange} rows={5} value={this.state.text}></textarea>
+                    </div>
+                    <div className='form-group'>
+                        <label htmlFor='truncateText'>TruncateText</label>
+                        <input className='form-control' id='truncateText' ref='truncateText' onChange={this.handleChange} type='text' value={this.state.truncateText}/>
+                    </div>
+                    <div className='checkbox'>
+                        <label htmlFor='showTitle'>
+                            <input id='showTitle' ref='showTitle' onChange={this.handleChange} type='checkbox' checked={this.state.showTitle}/>Show title
+                        </label>
+                    </div>
+                    <div className='checkbox'>
+                        <label htmlFor='appendTextTruncateChild'>
+                            <input id='appendTextTruncateChild' ref='appendTextTruncateChild' onChange={this.handleChange} type='checkbox' checked={this.state.appendTextTruncateChild}/>Append TextTruncate child
+                        </label>
+                    </div>
                 </div>
-                <div className='form-group'>
-                    <label htmlFor='text'>Text</label>
-                    <textarea className='form-control' id='text' ref='text' onChange={this.handleChange} rows={10} value={this.state.text}></textarea>
-                </div>
-                <div className='form-group'>
-                    <label htmlFor='truncateText'>TruncateText</label>
-                    <input className='form-control' id='truncateText' ref='truncateText' onChange={this.handleChange} type='text' value={this.state.truncateText}/>
-                </div>
-                <div className='checkbox'>
-                    <label htmlFor='showTitle'>
-                        <input id='showTitle' ref='showTitle' onChange={this.handleChange} type='checkbox' checked={this.state.showTitle}/>Show Title
-                    </label>
-                </div>
-                <div className='form-group sample'>
+                <div className='col-md-6 col-xs-12'>
                     <label>Result</label>
-                    {text}
+                    <div id='sample-1'>
+                        <TextTruncate {...props}/>
+                    </div>
+                    <div id='sample-2'>
+                        <div className='media'>
+                            <div className='media-left'>
+                                <img className='media-object' src='http://fakeimg.pl/64' width='64' height='64'/>
+                            </div>
+                            <div className='media-body'>
+                                <TextTruncate {...props}/>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         )
