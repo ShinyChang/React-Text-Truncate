@@ -29,6 +29,7 @@ var TextTruncate = require('react-text-truncate'); // CommonJS or UMD
 
 
 ## Changelog
+* 0.6.2 Fix infinite loop bug
 * 0.6.1 Fix lib issue for browser
 * 0.6.0 Support React 15
 * 0.5.2 Fix server render bug

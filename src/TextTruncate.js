@@ -70,7 +70,9 @@ export default class TextTruncate extends Component {
     getRenderText() {
         let textWidth = this.measureWidth(this.props.text);
         let scopeWidth = this.refs.scope.getBoundingClientRect().width;
-        if (scopeWidth >= textWidth) {
+        if (scopeWidth === 0) {
+            return '';
+        } else if (scopeWidth >= textWidth) {
             return this.props.text;
         } else {
             let currentPos = 1;
