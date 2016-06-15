@@ -6,23 +6,21 @@ export default class TextTruncate extends Component {
         truncateText: React.PropTypes.string,
         line: React.PropTypes.number,
         showTitle: React.PropTypes.bool,
-        textTruncateChild: React.PropTypes.node,
-        raf: React.PropTypes.bool
+        textTruncateChild: React.PropTypes.node
     };
 
     static defaultProps = {
         text: '',
         truncateText: '…',
         line: 1,
-        showTitle: true,
-        raf: true
+        showTitle: true
     };
 
     componentDidMount() {
-        let canvas = document.createElement('canvas');
-        let docFragment = document.createDocumentFragment();
-        let style = window.getComputedStyle(this.refs.scope);
-        let font = [
+        const canvas = document.createElement('canvas');
+        const docFragment = document.createDocumentFragment();
+        const style = window.getComputedStyle(this.refs.scope);
+        const font = [
             style['font-weight'],
             style['font-style'],
             style['font-size'],
@@ -33,33 +31,18 @@ export default class TextTruncate extends Component {
         this.canvas.font = font;
         this.forceUpdate();
 
-        if (this.props.raf) {
-          this.loopId = window.requestAnimationFrame(this.animationStep);
-        } else {
-          window.addEventListener('resize', this.onResize);
-        }
+        window.addEventListener('resize', this.onResize);
     }
 
     componentWillUnmount() {
-        if (this.props.raf) {
-            window.cancelAnimationFrame(this.loopId);
-        } else {
-            window.removeEventListener('resize', this.onResize);
-        }
+        window.removeEventListener('resize', this.onResize);
     }
 
-    animationStep = (timeStamp) => {
-        if ((timeStamp - this.lastTime) < 150) {
-            this.loopId = window.requestAnimationFrame(this.animationStep);
-            return;
-        }
-
-        this.lastTime = timeStamp;
-        this.onResize();
-        this.loopId = window.requestAnimationFrame(this.animationStep);
+    onResize = () => {
+        window.requestAnimationFrame(this.update.bind(this))
     };
 
-    onResize = () => {
+    update = () => {
         this.forceUpdate();
     };
 
@@ -115,33 +98,41 @@ export default class TextTruncate extends Component {
                     }
                 }
 
-
                 if (currentPos >= maxTextLength) {
                     startPos = maxTextLength;
                     break;
                 }
             }
+
             return startPos === maxTextLength
-                      ? this.props.text
-                      : this.props.text.substr(0, startPos) + this.props.truncateText;
+                        ? this.props.text
+                        : this.props.text.substr(0, startPos) + this.props.truncateText;
         }
     }
 
     render() {
-        let text = '';
+        const {
+            text,
+            truncateText,
+            line,
+            showTitle,
+            textTruncateChild,
+            ...props
+        } = this.props;
+
+        let renderText = '';
         if (this.refs.scope) {
-            text = this.getRenderText();
+            renderText = this.getRenderText();
         }
 
-        let attrs = {};
-        if (this.props.showTitle) {
-            attrs.title = this.props.text;
+        if (showTitle && !props.title) {
+            props.title = text;
         }
 
         return (
             <div ref='scope' style={{overflow: 'hidden'}}>
-                <div {...attrs}>{text}</div>
-                {this.props.text === text ? null : this.props.textTruncateChild}
+                <div {...props}>{renderText}</div>
+                {text === renderText ? null : textTruncateChild}
             </div>
         );
     }

@@ -27,6 +27,7 @@ export class App extends Component {
     onToggle = (e) => {
         var display = this.refs.invisibleBlock.style.display;
         this.refs.invisibleBlock.style.display = display === 'none' ? 'block' : 'none';
+        this.refs.invisibleTextTruncate.update();
     };
 
     render() {
@@ -84,7 +85,7 @@ export class App extends Component {
                     </div>
                     <div id='sample-3'>
                         <div ref='invisibleBlock' style={{display: 'none'}}>
-                            <TextTruncate {...props}/>
+                            <TextTruncate  ref='invisibleTextTruncate' {...props}/>
                         </div>
                         <button type='button' className='btn btn-default' onClick={this.onToggle}>Toggle show/hide</button>
                     </div>

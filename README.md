@@ -27,8 +27,19 @@ var TextTruncate = require('react-text-truncate'); // CommonJS or UMD
 
 [Demo](http://shinychang.github.io/React-Text-Truncate/)
 
+## FAQ
+
+1. Why TextTruncate not shown after display changed?
+
+    You must trigger update manually.
+
+2. Will TextTruncate support IE10 or below?
+
+    NO! IE 10 and below are dead according to [Microsoft post](https://www.microsoft.com/en-us/WindowsForBusiness/End-of-IE-support).
+
 
 ## Changelog
+* 0.7.0 Fix infinite update bug, drop raf
 * 0.6.2 Fix infinite loop bug
 * 0.6.1 Fix lib issue for browser
 * 0.6.0 Support React 15
