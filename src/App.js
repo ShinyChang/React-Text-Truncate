@@ -9,8 +9,7 @@ export class App extends Component {
             line: 2,
             truncateText: '…',
             showTitle: true,
-            appendTextTruncateChild: true,
-            raf: true
+            appendTextTruncateChild: true
         };
     }
 
@@ -69,11 +68,13 @@ export class App extends Component {
                     </div>
                 </div>
                 <div className='col-md-6 col-xs-12'>
-                    <label>Result</label>
+                    <h4>Result</h4>
                     <div id='sample-1'>
+                        <h5>1. Default</h5>
                         <TextTruncate {...props}/>
                     </div>
                     <div id='sample-2'>
+                        <h5>2. With floating image</h5>
                         <div className='media'>
                             <div className='media-left'>
                                 <img className='media-object' src='http://fakeimg.pl/64' width='64' height='64'/>
@@ -84,10 +85,15 @@ export class App extends Component {
                         </div>
                     </div>
                     <div id='sample-3'>
+                        <h5>3. Default hidden</h5>
                         <div ref='invisibleBlock' style={{display: 'none'}}>
                             <TextTruncate  ref='invisibleTextTruncate' {...props}/>
                         </div>
                         <button type='button' className='btn btn-default' onClick={this.onToggle}>Toggle show/hide</button>
+                    </div>
+                    <div id='sample-4'>
+                        <h5>4. Customize class</h5>
+                        <TextTruncate {...props} containerClassName='text-danger'/>
                     </div>
                 </div>
             </div>

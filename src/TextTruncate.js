@@ -6,7 +6,8 @@ export default class TextTruncate extends Component {
         truncateText: React.PropTypes.string,
         line: React.PropTypes.number,
         showTitle: React.PropTypes.bool,
-        textTruncateChild: React.PropTypes.node
+        textTruncateChild: React.PropTypes.node,
+        containerClassName: React.PropTypes.string
     };
 
     static defaultProps = {
@@ -117,6 +118,7 @@ export default class TextTruncate extends Component {
             line,
             showTitle,
             textTruncateChild,
+            containerClassName,
             ...props
         } = this.props;
 
@@ -130,7 +132,7 @@ export default class TextTruncate extends Component {
         }
 
         return (
-            <div ref='scope' style={{overflow: 'hidden'}}>
+            <div ref='scope' className={containerClassName} style={{overflow: 'hidden'}}>
                 <div {...props}>{renderText}</div>
                 {text === renderText ? null : textTruncateChild}
             </div>
