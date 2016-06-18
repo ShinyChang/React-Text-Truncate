@@ -122,7 +122,7 @@ export default class TextTruncate extends Component {
             ...props
         } = this.props;
 
-        let renderText = '';
+        let renderText = text;
         if (this.refs.scope) {
             renderText = this.getRenderText();
         }
