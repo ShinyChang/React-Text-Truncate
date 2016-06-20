@@ -39,6 +39,7 @@ var TextTruncate = require('react-text-truncate'); // CommonJS or UMD
 
 
 ## Changelog
+* 0.7.2 Server render will display all text
 * 0.7.1 Add new prop `containerClassName`
 * 0.7.0 Fix infinite update bug, drop raf
 * 0.6.2 Fix infinite loop bug
