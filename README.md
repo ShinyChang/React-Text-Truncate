@@ -20,8 +20,7 @@ var TextTruncate = require('react-text-truncate'); // CommonJS or UMD
 	line={1}
 	truncateText="…"
 	text="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
-	showTitle={true}
-    raf={true}
+    textTruncateChild={<a href="#">Read on</a>}
     />
 ```
 
@@ -35,10 +34,11 @@ var TextTruncate = require('react-text-truncate'); // CommonJS or UMD
 
 2. Will TextTruncate support IE10 or below?
 
-    NO! IE 10 and below are dead according to [Microsoft post](https://www.microsoft.com/en-us/WindowsForBusiness/End-of-IE-support).
+    No! IE 10 and below are dead according to [Microsoft post](https://www.microsoft.com/en-us/WindowsForBusiness/End-of-IE-support).
 
 
 ## Changelog
+* 0.8.0 Drop `showTitle`, put `textTruncateChild` in same line if `tagName` is `A` or `SPAN`
 * 0.7.2 Server render will display all text
 * 0.7.1 Add new prop `containerClassName`
 * 0.7.0 Fix infinite update bug, drop raf

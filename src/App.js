@@ -8,7 +8,6 @@ export class App extends Component {
             text: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
             line: 2,
             truncateText: '…',
-            showTitle: true,
             appendTextTruncateChild: true
         };
     }
@@ -18,7 +17,6 @@ export class App extends Component {
             line: this.refs.line.value << 0,
             text: this.refs.text.value,
             truncateText: this.refs.truncateText.value,
-            showTitle: this.refs.showTitle.checked,
             appendTextTruncateChild: this.refs.appendTextTruncateChild.checked
         });
     };
@@ -57,11 +55,6 @@ export class App extends Component {
                         <input className='form-control' id='truncateText' ref='truncateText' onChange={this.handleChange} type='text' value={this.state.truncateText}/>
                     </div>
                     <div className='checkbox'>
-                        <label htmlFor='showTitle'>
-                            <input id='showTitle' ref='showTitle' onChange={this.handleChange} type='checkbox' checked={this.state.showTitle}/>Show title
-                        </label>
-                    </div>
-                    <div className='checkbox'>
                         <label htmlFor='appendTextTruncateChild'>
                             <input id='appendTextTruncateChild' ref='appendTextTruncateChild' onChange={this.handleChange} type='checkbox' checked={this.state.appendTextTruncateChild}/>Append TextTruncate child
                         </label>
@@ -94,6 +87,10 @@ export class App extends Component {
                     <div id='sample-4'>
                         <h5>4. Customize class</h5>
                         <TextTruncate {...props} containerClassName='text-danger'/>
+                    </div>
+                    <div id='sample-5'>
+                        <h5>5. Block-level textTruncateChild</h5>
+                        <TextTruncate {...props} textTruncateChild={<div>Block level child</div>}/>
                     </div>
                 </div>
             </div>

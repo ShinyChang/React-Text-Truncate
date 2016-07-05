@@ -2,19 +2,17 @@ import React, {Component} from 'react';
 
 export default class TextTruncate extends Component {
     static propTypes = {
-        text: React.PropTypes.string,
-        truncateText: React.PropTypes.string,
+        containerClassName: React.PropTypes.string,
         line: React.PropTypes.number,
-        showTitle: React.PropTypes.bool,
+        text: React.PropTypes.string,
         textTruncateChild: React.PropTypes.node,
-        containerClassName: React.PropTypes.string
+        truncateText: React.PropTypes.string
     };
 
     static defaultProps = {
-        text: '',
-        truncateText: '…',
         line: 1,
-        showTitle: true
+        text: '',
+        truncateText: '…'
     };
 
     componentDidMount() {
@@ -27,11 +25,11 @@ export default class TextTruncate extends Component {
             style['font-size'],
             style['font-family']
         ].join(' ');
+
         docFragment.appendChild(canvas);
         this.canvas = canvas.getContext('2d');
         this.canvas.font = font;
         this.forceUpdate();
-
         window.addEventListener('resize', this.onResize);
     }
 
@@ -52,74 +50,101 @@ export default class TextTruncate extends Component {
     }
 
     getRenderText() {
-        let textWidth = this.measureWidth(this.props.text);
-        let scopeWidth = this.refs.scope.getBoundingClientRect().width;
-        if (scopeWidth === 0) {
-            return '';
-        } else if (scopeWidth >= textWidth) {
-            return this.props.text;
-        } else {
-            let currentPos = 1;
-            let maxTextLength = this.props.text.length;
-            let text = '';
-            let splitPos = 0;
-            let startPos = 0;
-            let line = this.props.line;
-            let width = 0;
-            let lastIsEng = false;
-            while(line--) {
-                let ext = line ? '' : this.props.truncateText;
-                while (currentPos <= maxTextLength) {
-                    text = this.props.text.substr(startPos, currentPos);
-                    width = this.measureWidth(text + ext);
-                    if (width < scopeWidth) {
-                        splitPos = this.props.text.indexOf(' ', currentPos + 1);
-                        if (splitPos === -1) {
-                            currentPos += 1;
-                            lastIsEng = false;
-                        } else {
-                            lastIsEng = true;
-                            currentPos = splitPos;
-                        }
-                    } else {
-                        do  {
-                            currentPos--;
-                            text = this.props.text.substr(startPos, currentPos);
-                            if (text[text.length - 1] === ' ') {
-                                text = this.props.text.substr(startPos, currentPos - 1);
-                            }
-                            if (lastIsEng) {
-                                currentPos = text.lastIndexOf(' ');
-                                text = this.props.text.substr(startPos, currentPos);
-                            }
-                            width = this.measureWidth(text + ext);
-                        } while (width >= scopeWidth);
-                        startPos += currentPos;
-                        break;
-                    }
-                }
+        const {
+            containerClassName,
+            line,
+            text,
+            textTruncateChild,
+            truncateText,
+            ...props
+        } = this.props;
 
-                if (currentPos >= maxTextLength) {
-                    startPos = maxTextLength;
+        const scopeWidth = this.refs.scope.getBoundingClientRect().width;
+
+        // return if display:none
+        if (scopeWidth === 0) {
+            return null;
+        }
+
+        // return if all of text can be displayed
+        if (scopeWidth >= this.measureWidth(text)) {
+            return (
+                <div {...props}>{text}</div>
+            );
+        }
+
+        let childText = '';
+        if (typeof textTruncateChild.type === 'string') {
+            if (['span', 'a'].includes(textTruncateChild.type)) {
+                childText = textTruncateChild.props.children;
+            }
+        }
+
+        let currentPos = 1;
+        let maxTextLength = text.length;
+        let truncatedText = '';
+        let splitPos = 0;
+        let startPos = 0;
+        let displayLine = line;
+        let width = 0;
+        let lastIsEng = false;
+
+        while(displayLine--) {
+            let ext = displayLine ? '' : truncateText + ' ' + childText;
+            while (currentPos <= maxTextLength) {
+                truncatedText = text.substr(startPos, currentPos);
+                width = this.measureWidth(truncatedText + ext);
+                if (width < scopeWidth) {
+                    splitPos = text.indexOf(' ', currentPos + 1);
+                    if (splitPos === -1) {
+                        currentPos += 1;
+                        lastIsEng = false;
+                    } else {
+                        lastIsEng = true;
+                        currentPos = splitPos;
+                    }
+                } else {
+                    do  {
+                        currentPos--;
+                        truncatedText = text.substr(startPos, currentPos);
+                        if (truncatedText[truncatedText.length - 1] === ' ') {
+                            truncatedText = text.substr(startPos, currentPos - 1);
+                        }
+                        if (lastIsEng) {
+                            currentPos = truncatedText.lastIndexOf(' ');
+                            truncatedText = text.substr(startPos, currentPos);
+                        }
+                        width = this.measureWidth(truncatedText + ext);
+                    } while (width >= scopeWidth);
+                    startPos += currentPos;
                     break;
                 }
             }
 
-            return startPos === maxTextLength
-                        ? this.props.text
-                        : this.props.text.substr(0, startPos) + this.props.truncateText;
+            if (currentPos >= maxTextLength) {
+                startPos = maxTextLength;
+                break;
+            }
         }
+
+        if (startPos === maxTextLength) {
+            return (
+                text
+            );
+        }
+        return (
+            <div {...props}>
+                {text.substr(0, startPos) + truncateText + ' '}
+                {textTruncateChild}
+            </div>
+        );
+
     }
 
     render() {
         const {
             text,
-            truncateText,
-            line,
-            showTitle,
-            textTruncateChild,
             containerClassName,
-            ...props
         } = this.props;
 
         let renderText = text;
@@ -127,14 +152,9 @@ export default class TextTruncate extends Component {
             renderText = this.getRenderText();
         }
 
-        if (showTitle && !props.title) {
-            props.title = text;
-        }
-
         return (
             <div ref='scope' className={containerClassName} style={{overflow: 'hidden'}}>
-                <div {...props}>{renderText}</div>
-                {text === renderText ? null : textTruncateChild}
+                {renderText}
             </div>
         );
     }
