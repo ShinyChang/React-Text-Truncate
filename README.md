@@ -38,6 +38,7 @@ var TextTruncate = require('react-text-truncate'); // CommonJS or UMD
 
 
 ## Changelog
+* 0.8.1 Fix `textTruncateChild` bug
 * 0.8.0 Drop `showTitle`, put `textTruncateChild` in same line if `tagName` is `A` or `SPAN`
 * 0.7.2 Server render will display all text
 * 0.7.1 Add new prop `containerClassName`

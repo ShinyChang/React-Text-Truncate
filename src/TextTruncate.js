@@ -74,7 +74,7 @@ export default class TextTruncate extends Component {
         }
 
         let childText = '';
-        if (typeof textTruncateChild.type === 'string') {
+        if (textTruncateChild && typeof textTruncateChild.type === 'string') {
             if (['span', 'a'].includes(textTruncateChild.type)) {
                 childText = textTruncateChild.props.children;
             }
@@ -89,7 +89,7 @@ export default class TextTruncate extends Component {
         let width = 0;
         let lastIsEng = false;
 
-        while(displayLine--) {
+        while (displayLine--) {
             let ext = displayLine ? '' : truncateText + ' ' + childText;
             while (currentPos <= maxTextLength) {
                 truncatedText = text.substr(startPos, currentPos);
