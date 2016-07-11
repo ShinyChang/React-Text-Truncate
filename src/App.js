@@ -92,6 +92,12 @@ export class App extends Component {
                         <h5>5. Block-level textTruncateChild</h5>
                         <TextTruncate {...props} textTruncateChild={<div>Block level child</div>}/>
                     </div>
+                    <div id='sample-6'>
+                        <h5>6. Long words inside a small container</h5>
+                        <div style={{
+                            width: 150
+                        }}><TextTruncate line={3} text="Национал-Большевизм. Сталинская массовая культура и формирование русского национального самосознания (1931-1956)" /></div>
+                    </div>
                 </div>
             </div>
         )
