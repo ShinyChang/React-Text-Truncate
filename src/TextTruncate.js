@@ -88,6 +88,7 @@ export default class TextTruncate extends Component {
         let displayLine = line;
         let width = 0;
         let lastIsEng = false;
+        let lastSpaceIndex = -1;
 
         while (displayLine--) {
             let ext = displayLine ? '' : truncateText + ' ' + childText;
@@ -111,8 +112,11 @@ export default class TextTruncate extends Component {
                             truncatedText = text.substr(startPos, currentPos - 1);
                         }
                         if (lastIsEng) {
-                            currentPos = truncatedText.lastIndexOf(' ');
-                            truncatedText = text.substr(startPos, currentPos);
+                            lastSpaceIndex = truncatedText.lastIndexOf(' ');
+                            if (lastSpaceIndex > -1) {
+                                currentPos = lastSpaceIndex;
+                                truncatedText = text.substr(startPos, currentPos);
+                            }
                         }
                         width = this.measureWidth(truncatedText + ext);
                     } while (width >= scopeWidth);
