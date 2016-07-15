@@ -66,6 +66,7 @@ export class App extends Component {
                         <h5>1. Default</h5>
                         <TextTruncate {...props}/>
                     </div>
+                    {/*
                     <div id='sample-2'>
                         <h5>2. With floating image</h5>
                         <div className='media'>
@@ -98,6 +99,7 @@ export class App extends Component {
                             width: 150
                         }}><TextTruncate line={3} text="Национал-Большевизм. Сталинская массовая культура и формирование русского национального самосознания (1931-1956)" /></div>
                     </div>
+                    */}
                 </div>
             </div>
         )

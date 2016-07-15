@@ -1,12 +1,12 @@
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
 
 export default class TextTruncate extends Component {
     static propTypes = {
-        containerClassName: React.PropTypes.string,
-        line: React.PropTypes.number,
-        text: React.PropTypes.string,
-        textTruncateChild: React.PropTypes.node,
-        truncateText: React.PropTypes.string
+        containerClassName: PropTypes.string,
+        line: PropTypes.number,
+        text: PropTypes.string,
+        textTruncateChild: PropTypes.node,
+        truncateText: PropTypes.string
     };
 
     static defaultProps = {
@@ -15,41 +15,73 @@ export default class TextTruncate extends Component {
         truncateText: '…'
     };
 
-    componentDidMount() {
-        const canvas = document.createElement('canvas');
-        const docFragment = document.createDocumentFragment();
-        const style = window.getComputedStyle(this.refs.scope);
-        const font = [
-            style['font-weight'],
-            style['font-style'],
-            style['font-size'],
-            style['font-family']
-        ].join(' ');
+    constructor(props) {
+        super(props);
+        this.rafID = null;
+        this.displyedText = '';
+    }
 
-        docFragment.appendChild(canvas);
-        this.canvas = canvas.getContext('2d');
-        this.canvas.font = font;
-        this.forceUpdate();
+    componentDidMount() {
+        this.update();
         window.addEventListener('resize', this.onResize);
+    }
+
+    componentDidUpdate() {
+        if (!this.done) {
+            this.forceUpdate();
+        }
     }
 
     componentWillUnmount() {
         window.removeEventListener('resize', this.onResize);
     }
 
+    // shouldComponentUpdate(nextProps, nextState) {
+
+    // }
+
     onResize = () => {
-        window.requestAnimationFrame(this.update.bind(this))
+        const requestID = window.requestAnimationFrame(this.update.bind(this));
+
+        if (this.rafID) {
+            window.window.cancelAnimationFrame(this.rafID);
+            this.rafID = requestID;
+        }
     };
 
     update = () => {
-        this.forceUpdate();
+        this.setState({
+            scopeRect: this.getRect(this.refs.scope),
+            rafID: null
+        });
     };
 
-    measureWidth(text) {
-        return this.canvas.measureText(text).width;
+    getRect(element) {
+        return element.getBoundingClientRect();
     }
 
-    getRenderText() {
+    getStyleInfo(element) {
+        const style = window.getComputedStyle(element);
+        const data = {
+            width: parseInt(style.width, 10),
+            height: parseInt(style.height, 10),
+            fontSize: parseInt(style.fontSize, 10),
+        };
+
+        if (style.lineHeight === 'normal') {
+            data.lineHeight = Math.round(data.fontSize * 1.14);
+        } else if (style.lineHeight.indexOf('px')) {
+            data.lineHeight = parseInt(style.lineHeight, 10);
+        } else {
+            data.lineHeight = Math.round(data.fontSize * parseFloat(style.lineHeight));
+        }
+
+        data.lines = Math.round(data.height / data.lineHeight);
+
+        return data;
+    }
+
+    getRenderText = () => {
         const {
             containerClassName,
             line,
@@ -59,99 +91,61 @@ export default class TextTruncate extends Component {
             ...props
         } = this.props;
 
-        const scopeWidth = this.refs.scope.getBoundingClientRect().width;
+        const {
+            scopeRect
+        } = this.state;
 
         // return if display:none
-        if (scopeWidth === 0) {
-            return null;
-        }
-
-        // return if all of text can be displayed
-        if (scopeWidth >= this.measureWidth(text)) {
+        if (scopeRect.width === 0) {
             return (
-                <div {...props}>{text}</div>
+                <div {...props} ref='text'></div>
             );
         }
 
-        let childText = '';
-        if (textTruncateChild && typeof textTruncateChild.type === 'string') {
-            if (['span', 'a'].includes(textTruncateChild.type)) {
-                childText = textTruncateChild.props.children;
-            }
-        }
-
-        let currentPos = 1;
-        let maxTextLength = text.length;
-        let truncatedText = '';
-        let splitPos = 0;
-        let startPos = 0;
-        let displayLine = line;
-        let width = 0;
-        let lastIsEng = false;
-        let lastSpaceIndex = -1;
-
-        while (displayLine--) {
-            let ext = displayLine ? '' : truncateText + ' ' + childText;
-            while (currentPos <= maxTextLength) {
-                truncatedText = text.substr(startPos, currentPos);
-                width = this.measureWidth(truncatedText + ext);
-                if (width < scopeWidth) {
-                    splitPos = text.indexOf(' ', currentPos + 1);
-                    if (splitPos === -1) {
-                        currentPos += 1;
-                        lastIsEng = false;
-                    } else {
-                        lastIsEng = true;
-                        currentPos = splitPos;
-                    }
-                } else {
-                    do  {
-                        currentPos--;
-                        truncatedText = text.substr(startPos, currentPos);
-                        if (truncatedText[truncatedText.length - 1] === ' ') {
-                            truncatedText = text.substr(startPos, currentPos - 1);
-                        }
-                        if (lastIsEng) {
-                            lastSpaceIndex = truncatedText.lastIndexOf(' ');
-                            if (lastSpaceIndex > -1) {
-                                currentPos = lastSpaceIndex;
-                                truncatedText = text.substr(startPos, currentPos);
-                            }
-                        }
-                        width = this.measureWidth(truncatedText + ext);
-                    } while (width >= scopeWidth);
-                    startPos += currentPos;
-                    break;
-                }
-            }
-
-            if (currentPos >= maxTextLength) {
-                startPos = maxTextLength;
-                break;
-            }
-        }
-
-        if (startPos === maxTextLength) {
+        // return if display all of the text
+        const textStyle = this.getStyleInfo(this.refs.text);
+        if ((!this.displyedText || this.displyedText === text) && textStyle.lines <= line) {
+            this.displyedText = text;
             return (
-                text
+                <div {...props} ref='text'>{text}</div>
             );
         }
+        if (this.displyedText) {
+            if (this.height > textStyle.height) {
+                this.max = this.displyedText.length;
+            } else {
+                this.min = this.displyedText.length;
+            }
+            this.displyedText = this.displyedText + text.substring(this.displyedText.length, (this.min + this.max) / 2);
+        } else {
+            this.min = Math.floor(text.length / textStyle.lines * line);
+            this.max = Math.ceil(text.length / textStyle.lines * (line + 1));
+            this.height = textStyle.height;
+            this.displyedText = text.substr(0, text.length / textStyle.lines * line);
+        }
+        this.done = this.max === this.min;
+        console.log(this.min, this.max, this.done);
+
         return (
-            <div {...props}>
-                {text.substr(0, startPos) + truncateText + ' '}
-                {textTruncateChild}
+            <div {...props} ref='text'>
+                {this.displyedText}
+                {truncateText}
+                <span ref='textTruncateChild'>{textTruncateChild}</span>
             </div>
         );
-
     }
 
     render() {
+        console.log('render');
         const {
             text,
             containerClassName,
         } = this.props;
 
-        let renderText = text;
+        let renderText = (
+            <div ref='text'>{text}</div>
+        );
+
         if (this.refs.scope) {
             renderText = this.getRenderText();
         }
