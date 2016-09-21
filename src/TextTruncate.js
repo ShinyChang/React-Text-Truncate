@@ -75,7 +75,8 @@ export default class TextTruncate extends Component {
 
         let childText = '';
         if (textTruncateChild && typeof textTruncateChild.type === 'string') {
-            if (['span', 'a'].includes(textTruncateChild.type)) {
+            let type = textTruncateChild.type;
+            if (type.indexOf('span') >= 0 || type.indexOf('a') >= 0) {
                 childText = textTruncateChild.props.children;
             }
         }
