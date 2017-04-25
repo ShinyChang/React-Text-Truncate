@@ -120,7 +120,7 @@ export default class TextTruncate extends Component {
                             }
                         }
                         width = this.measureWidth(truncatedText + ext);
-                    } while (width >= scopeWidth);
+                    } while (width >= scopeWidth && truncatedText.length > 0);
                     startPos += currentPos;
                     break;
                 }
