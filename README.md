@@ -17,11 +17,11 @@ var TextTruncate = require('react-text-truncate'); // CommonJS or UMD
 
 ```
 <TextTruncate
-	line={1}
-	truncateText="…"
-	text="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+    line={1}
+    truncateText="…"
+    text="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
     textTruncateChild={<a href="#">Read on</a>}
-    />
+/>
 ```
 
 [Demo](http://shinychang.github.io/React-Text-Truncate/)
