@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 
 export default class TextTruncate extends Component {
     static propTypes = {
-        containerClassName: React.PropTypes.string,
-        line: React.PropTypes.number,
-        text: React.PropTypes.string,
-        textTruncateChild: React.PropTypes.node,
-        truncateText: React.PropTypes.string
+        containerClassName: PropTypes.string,
+        line: PropTypes.number,
+        text: PropTypes.string,
+        textTruncateChild: PropTypes.node,
+        truncateText: PropTypes.string
     };
 
     static defaultProps = {
