@@ -38,6 +38,7 @@ var TextTruncate = require('react-text-truncate'); // CommonJS or UMD
 
 
 ## Changelog
+* 0.9.0 Fix infinity loop bug, upgrade react to 15.5.4 and support yarn
 * 0.8.3 IE 11 compatibility
 * 0.8.2 Fix wrong truncating when a container has long words without spaces
 * 0.8.1 Fix `textTruncateChild` bug
