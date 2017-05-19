@@ -38,6 +38,7 @@ var TextTruncate = require('react-text-truncate'); // CommonJS or UMD
 
 
 ## Changelog
+* 0.9.2 Fix styles prop is not working when the text is not truncated
 * 0.9.1 Fix async this.forceUpdate() issue
 * 0.9.0 Fix infinity loop bug, upgrade react to 15.5.4 and support yarn
 * 0.8.3 IE 11 compatibility
