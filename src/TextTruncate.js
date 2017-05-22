@@ -1,10 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
-const requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
-                              window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
-const cancelAnimationFrame = window.cancelAnimationFrame || window.mozCancelAnimationFrame;
-
 export default class TextTruncate extends Component {
   static propTypes = {
     containerClassName: PropTypes.string,
@@ -41,15 +37,15 @@ export default class TextTruncate extends Component {
   componentWillUnmount() {
     window.removeEventListener('resize', this.onResize);
     if (this.rafId) {
-     cancelAnimationFrame(this.rafId);
+     window.cancelAnimationFrame(this.rafId);
     }
   }
 
   onResize = () => {
     if (this.rafId) {
-      cancelAnimationFrame(this.rafId);
+      window.cancelAnimationFrame(this.rafId);
     }
-    this.rafId = requestAnimationFrame(this.update.bind(this))
+    this.rafId = window.requestAnimationFrame(this.update.bind(this))
   };
 
   update = () => {

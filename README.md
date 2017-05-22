@@ -36,8 +36,12 @@ var TextTruncate = require('react-text-truncate'); // CommonJS or UMD
 
     No! IE 10 and below are dead according to [Microsoft post](https://www.microsoft.com/en-us/WindowsForBusiness/End-of-IE-support).
 
+3. Uncaught ReferenceError: requestAnimationFrame is not defined
+
+    Please polyfill `requestAnimationFrame` before you called `<TextTruncated />`
 
 ## Changelog
+* 0.9.3 Fix SSR window not found (removed raf polyfill)
 * 0.9.2 Fix styles prop is not working when the text is not truncated
 * 0.9.1 Fix async this.forceUpdate() issue
 * 0.9.0 Fix infinity loop bug, upgrade react to 15.5.4 and support yarn
@@ -58,5 +62,5 @@ var TextTruncate = require('react-text-truncate'); // CommonJS or UMD
 * 0.3.7 Support CommonJS and UMD module loader
 * 0.3.5 Fix window resize issue
 * 0.3.4 supports Babel6
-* 0.2.0 supoorts React 0.14
+* 0.2.0 supports React 0.14
 * 0.1.5 supports React 0.13.3 and below
