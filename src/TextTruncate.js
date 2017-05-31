@@ -1,9 +1,10 @@
-import React, {Component} from 'react';
+import React, {Component, createElement} from 'react';
 import PropTypes from 'prop-types';
 
 export default class TextTruncate extends Component {
   static propTypes = {
     containerClassName: PropTypes.string,
+    element: PropTypes.string,
     line: PropTypes.number,
     text: PropTypes.string,
     textTruncateChild: PropTypes.node,
@@ -11,6 +12,7 @@ export default class TextTruncate extends Component {
   };
 
   static defaultProps = {
+    element: 'div',
     line: 1,
     text: '',
     truncateText: '…'
@@ -154,19 +156,18 @@ export default class TextTruncate extends Component {
 
   render() {
     const {
+      element,
       text,
       containerClassName,
     } = this.props;
 
-    let renderText = text;
-    if (this.scope) {
-      renderText = this.getRenderText();
-    }
+    const renderText = this.scope ? this.getRenderText() : text;
+    const rootProps = {
+      ref: (el) => {this.scope = el},
+      className: containerClassName,
+      style: {overflow: 'hidden'}
+    };
 
-    return (
-      <div ref={(el) => {this.scope = el;}} className={containerClassName} style={{overflow: 'hidden'}}>
-        {renderText}
-      </div>
-    );
+    return createElement(element, rootProps, renderText);
   }
 };

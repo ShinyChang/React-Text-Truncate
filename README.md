@@ -41,6 +41,7 @@ var TextTruncate = require('react-text-truncate'); // CommonJS or UMD
     Please polyfill `requestAnimationFrame` before you called `<TextTruncated />`
 
 ## Changelog
+* 0.10.0 Allow pass `element` to specify root element type
 * 0.9.3 Fix SSR window not found (removed raf polyfill)
 * 0.9.2 Fix styles prop is not working when the text is not truncated
 * 0.9.1 Fix async this.forceUpdate() issue
