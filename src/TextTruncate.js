@@ -65,6 +65,7 @@ export default class TextTruncate extends Component {
       text,
       textTruncateChild,
       truncateText,
+      element,
       ...props
     } = this.props;
 
