@@ -51,6 +51,14 @@ export default class TextTruncate extends Component {
   };
 
   update = () => {
+    const style = window.getComputedStyle(this.scope);
+    const font = [
+      style['font-weight'],
+      style['font-style'],
+      style['font-size'],
+      style['font-family']
+    ].join(' ');
+    this.canvas.font = font;
     this.forceUpdate();
   };
 
