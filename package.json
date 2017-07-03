@@ -1,6 +1,6 @@
 {
   "name": "react-text-truncate",
-  "version": "0.10.2",
+  "version": "0.10.3",
   "description": "Truncate text for React.js",
   "main": "lib/index.js",
   "scripts": {
@@ -45,8 +45,8 @@
     "webpack-hot-middleware": "^2.10.0"
   },
   "peerDependencies": {
-    "react": "^15.5.4",
-    "react-dom": "^15.5.4"
+    "react": "^15.4.1",
+    "react-dom": "^15.4.1"
   },
   "dependencies": {
     "prop-types": "^15.5.7"
