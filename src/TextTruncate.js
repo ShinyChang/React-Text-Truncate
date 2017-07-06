@@ -168,13 +168,16 @@ export default class TextTruncate extends Component {
       element,
       text,
       containerClassName,
+      style = {}
     } = this.props;
+
+    const { fontWeight, fontStyle, fontSize, fontFamily } = style;
 
     const renderText = this.scope ? this.getRenderText() : text;
     const rootProps = {
       ref: (el) => {this.scope = el},
       className: containerClassName,
-      style: {overflow: 'hidden'}
+      style: {overflow: 'hidden', fontWeight, fontStyle, fontSize, fontFamily}
     };
 
     return createElement(element, rootProps, renderText);
