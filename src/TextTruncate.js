@@ -8,7 +8,9 @@ export default class TextTruncate extends Component {
     line: PropTypes.number,
     text: PropTypes.string,
     textTruncateChild: PropTypes.node,
-    truncateText: PropTypes.string
+    truncateText: PropTypes.string,
+    onTruncated: PropTypes.func,
+    onCalculated: PropTypes.func
   };
 
   static defaultProps = {
@@ -48,6 +50,14 @@ export default class TextTruncate extends Component {
       window.cancelAnimationFrame(this.rafId);
     }
     this.rafId = window.requestAnimationFrame(this.update.bind(this))
+  };
+
+  onTruncated = () => {
+    typeof this.props.onTruncated === 'function' && setTimeout(() => this.props.onTruncated(), 0);
+  };
+
+  onCalculated = () => {
+    typeof this.props.onCalculated === 'function' && setTimeout(() => this.props.onCalculated(), 0);
   };
 
   update = () => {
@@ -155,6 +165,8 @@ export default class TextTruncate extends Component {
         <div {...props}>{text}</div>
       );
     }
+    
+    this.onTruncated();
     return (
       <div {...props}>
         {text.substr(0, startPos) + truncateText + ' '}
@@ -180,6 +192,7 @@ export default class TextTruncate extends Component {
       style: {overflow: 'hidden', fontWeight, fontStyle, fontSize, fontFamily}
     };
 
+    this.scope && this.onCalculated();
     return createElement(element, rootProps, renderText);
   }
 };

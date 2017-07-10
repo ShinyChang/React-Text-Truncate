@@ -98,6 +98,10 @@ export class App extends Component {
                             width: 150
                         }}><TextTruncate line={3} text="Национал-Большевизм. Сталинская массовая культура и формирование русского национального самосознания (1931-1956)" /></div>
                     </div>
+                    <div id='sample-7'>
+                        <h5>7. hook event</h5>
+                        <TextTruncate {...props} onCalculated={() => console.log('onCalculated')} onTruncated={() => console.log('onTruncated')}/>
+                    </div>
                 </div>
             </div>
         )
