@@ -108,14 +108,24 @@ export class App extends Component {
                             <TextTruncate line={3} text="LoremIpsumissimplydummytextoftheprintingand typesettingindustry.fuhefjfvfjfkvjkvhjkjkvhjjhdfvjfhvjvj hfvjvfhjjhfjsfhjf ghj" />
                         </div>
                     </div>
-                    <div id='sample-8'>
+                    <div id='sample-9'>
                         <h5>9. Non-spaced language (fixed width: 200px)</h5>
                         <div style={{width: 200}}>
                             <TextTruncate {...props} text="中文測試中文測試中文測試中文測試中文測試中文測試中文測試中文測試中文測試中文測試中文測試中文測試" />
                         </div>
+                    </div>
+                    <div id='sample-10'>
+                        <h5>10. Custom text element</h5>
+                        <TextTruncate {...props} textElement={customTextRender} />
                     </div>
                 </div>
             </div>
         )
     }
 }
+
+const customTextRender = ({children}) => {
+    return (
+        <div>{children.split('').reverse().join('')}</div>
+    )
+};
