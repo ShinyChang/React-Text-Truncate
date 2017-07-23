@@ -6,17 +6,19 @@ export default class TextTruncate extends Component {
     containerClassName: PropTypes.string,
     element: PropTypes.string,
     line: PropTypes.number,
-    text: PropTypes.string,
-    textTruncateChild: PropTypes.node,
-    truncateText: PropTypes.string,
+    onCalculated: PropTypes.func,
     onTruncated: PropTypes.func,
-    onCalculated: PropTypes.func
+    text: PropTypes.string,
+    textElement: PropTypes.node,
+    textTruncateChild: PropTypes.node,
+    truncateText: PropTypes.string
   };
 
   static defaultProps = {
     element: 'div',
     line: 1,
     text: '',
+    textElement: 'div',
     truncateText: '…'
   };
 
@@ -79,13 +81,14 @@ export default class TextTruncate extends Component {
   getRenderText() {
     const {
       containerClassName,
-      line,
-      text,
-      textTruncateChild,
-      truncateText,
       element,
+      line,
       onCalculated,
       onTruncated,
+      text,
+      textElement,
+      textTruncateChild,
+      truncateText,
       ...props
     } = this.props;
 
@@ -98,9 +101,7 @@ export default class TextTruncate extends Component {
 
     // return if all of text can be displayed
     if (scopeWidth >= this.measureWidth(text)) {
-      return (
-        <div {...props}>{text}</div>
-      );
+      return createElement(textElement, props, text);
     }
 
     let childText = '';
@@ -171,15 +172,13 @@ export default class TextTruncate extends Component {
     }
 
     if (startPos === maxTextLength) {
-      return (
-        <div {...props}>{text}</div>
-      );
+      return createElement(textElement, props, text);
     }
     
     this.onTruncated();
     return (
       <div {...props}>
-        {text.substr(0, startPos) + truncateText + ' '}
+        {createElement(textElement, props, text.substr(0, startPos) + truncateText + ' ')}
         {textTruncateChild}
       </div>
     );
@@ -189,13 +188,20 @@ export default class TextTruncate extends Component {
     const {
       element,
       text,
+      style = {},
       containerClassName,
-      style = {}
+      line,
+      onCalculated,
+      onTruncated,
+      textElement,
+      textTruncateChild,
+      truncateText,
+      ...props
     } = this.props;
 
     const { fontWeight, fontStyle, fontSize, fontFamily } = style;
 
-    const renderText = this.scope ? this.getRenderText() : text;
+    const renderText = this.scope ? this.getRenderText() : createElement(textElement, props, text);;
     const rootProps = {
       ref: (el) => {this.scope = el},
       className: containerClassName,
