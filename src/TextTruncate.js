@@ -84,6 +84,8 @@ export default class TextTruncate extends Component {
       textTruncateChild,
       truncateText,
       element,
+      onCalculated,
+      onTruncated,
       ...props
     } = this.props;
 
@@ -117,9 +119,11 @@ export default class TextTruncate extends Component {
     let displayLine = line;
     let width = 0;
     let lastIsEng = false;
+    let isPrevLineWithoutSpace = true;
+    let lastPos = 0;
     let lastSpaceIndex = -1;
-
-    while (displayLine--) {
+    let c = 0;
+    while (displayLine-- > 0) {
       let ext = displayLine ? '' : truncateText + ' ' + childText;
       while (currentPos <= maxTextLength) {
         truncatedText = text.substr(startPos, currentPos);
@@ -143,7 +147,7 @@ export default class TextTruncate extends Component {
             if (lastIsEng) {
               lastSpaceIndex = truncatedText.lastIndexOf(' ');
               if (lastSpaceIndex > -1) {
-                currentPos = lastSpaceIndex;
+                currentPos = lastSpaceIndex - 1;
                 truncatedText = text.substr(startPos, currentPos);
               }
             }
@@ -158,6 +162,12 @@ export default class TextTruncate extends Component {
         startPos = maxTextLength;
         break;
       }
+
+      if (lastIsEng && !isPrevLineWithoutSpace && text.substr(lastPos, currentPos).indexOf(' ') === -1) {
+        isPrevLineWithoutSpace = text.substr(lastPos, currentPos).indexOf(' ') === -1;
+        displayLine--;
+      }
+      lastPos = currentPos + 1;
     }
 
     if (startPos === maxTextLength) {
