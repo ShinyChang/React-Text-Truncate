@@ -119,10 +119,10 @@ export default class TextTruncate extends Component {
     let displayLine = line;
     let width = 0;
     let lastIsEng = false;
-    let isPrevLineWithoutSpace = true;
+    let isPrevLineWithoutSpace = false;
     let lastPos = 0;
     let lastSpaceIndex = -1;
-    let c = 0;
+    
     while (displayLine-- > 0) {
       let ext = displayLine ? '' : truncateText + ' ' + childText;
       while (currentPos <= maxTextLength) {
