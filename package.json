@@ -1,6 +1,6 @@
 {
   "name": "react-text-truncate",
-  "version": "0.12.0",
+  "version": "0.12.1",
   "description": "Truncate text for React.js",
   "main": "lib/index.js",
   "scripts": {
@@ -35,8 +35,8 @@
     "babel-preset-react": "^6.5.0",
     "babel-preset-stage-0": "^6.5.0",
     "express": "^4.13.4",
-    "react": "^15.5.4",
-    "react-dom": "^15.5.4",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
     "react-transform-catch-errors": "^1.0.2",
     "react-transform-hmr": "^1.0.4",
     "redbox-react": "^1.2.3",
@@ -45,8 +45,8 @@
     "webpack-hot-middleware": "^2.10.0"
   },
   "peerDependencies": {
-    "react": "^15.4.1",
-    "react-dom": "^15.4.1"
+    "react": "^15.4.1 || ^16.0.0",
+    "react-dom": "^15.4.1 || ^16.0.0"
   },
   "dependencies": {
     "prop-types": "^15.5.7"

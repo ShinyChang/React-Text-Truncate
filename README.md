@@ -41,6 +41,7 @@ var TextTruncate = require('react-text-truncate'); // CommonJS or UMD
     Please polyfill `requestAnimationFrame` before you called `<TextTruncated />`
 
 ## Changelog
+* 0.12.1 Update peerDependencies to support React 16
 * 0.12.0 Added new prop: `textElement` for customize text render
 * 0.11.2 Fix truncate incorrect in small size of width
 * 0.11.0 Added two event hooks: `onTruncated` and `onCalculated`
