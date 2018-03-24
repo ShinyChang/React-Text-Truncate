@@ -5,21 +5,23 @@ export default class TextTruncate extends Component {
   static propTypes = {
     containerClassName: PropTypes.string,
     element: PropTypes.string,
-    line: PropTypes.number,
+    line: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]),
     onCalculated: PropTypes.func,
     onTruncated: PropTypes.func,
     text: PropTypes.string,
     textElement: PropTypes.node,
     textTruncateChild: PropTypes.node,
-    truncateText: PropTypes.string
+    truncateText: PropTypes.string,
+    maxCalculateTimes: PropTypes.number
   };
 
   static defaultProps = {
     element: 'div',
     line: 1,
     text: '',
-    textElement: 'div',
-    truncateText: '…'
+    textElement: 'span',
+    truncateText: '…',
+    maxCalculateTimes: 10
   };
 
   componentDidMount() {
@@ -68,14 +70,15 @@ export default class TextTruncate extends Component {
       style['font-weight'],
       style['font-style'],
       style['font-size'],
-      style['font-family']
+      style['font-family'],
+      style['letter-spacing']
     ].join(' ');
     this.canvas.font = font;
     this.forceUpdate();
   };
 
   measureWidth(text) {
-    return this.canvas.measureText(text).width;
+    return Math.ceil(this.canvas.measureText(text).width);
   }
 
   getRenderText() {
@@ -89,6 +92,7 @@ export default class TextTruncate extends Component {
       textElement,
       textTruncateChild,
       truncateText,
+      maxCalculateTimes,
       ...props
     } = this.props;
 
@@ -123,9 +127,11 @@ export default class TextTruncate extends Component {
     let isPrevLineWithoutSpace = false;
     let lastPos = 0;
     let lastSpaceIndex = -1;
+    let ext = '';
+    let loopCnt = 0;
     
     while (displayLine-- > 0) {
-      let ext = displayLine ? '' : truncateText + ' ' + childText;
+      ext = displayLine ? '' : truncateText + (childText ? (' ' + childText) : '');
       while (currentPos <= maxTextLength) {
         truncatedText = text.substr(startPos, currentPos);
         width = this.measureWidth(truncatedText + ext);
@@ -140,17 +146,31 @@ export default class TextTruncate extends Component {
           }
         } else {
           do  {
-            currentPos--;
+            if (loopCnt++ >= maxCalculateTimes) {
+              break;
+            }
             truncatedText = text.substr(startPos, currentPos);
+            if (!displayLine) {
+              currentPos--;
+            }
             if (truncatedText[truncatedText.length - 1] === ' ') {
               truncatedText = text.substr(startPos, currentPos - 1);
             }
             if (lastIsEng) {
               lastSpaceIndex = truncatedText.lastIndexOf(' ');
               if (lastSpaceIndex > -1) {
-                currentPos = lastSpaceIndex - 1;
+                currentPos = lastSpaceIndex;
+                if (displayLine) {
+                  currentPos++;
+                }
+                truncatedText = text.substr(startPos, currentPos);
+              } else {
+                currentPos--;  
                 truncatedText = text.substr(startPos, currentPos);
               }
+            } else {
+              currentPos--;
+              truncatedText = text.substr(startPos, currentPos);
             }
             width = this.measureWidth(truncatedText + ext);
           } while (width >= scopeWidth && truncatedText.length > 0);
@@ -201,7 +221,7 @@ export default class TextTruncate extends Component {
 
     const { fontWeight, fontStyle, fontSize, fontFamily } = style;
 
-    const renderText = this.scope ? this.getRenderText() : createElement(textElement, props, text);;
+    const renderText = this.scope && line ? this.getRenderText() : createElement(textElement, props, text);;
     const rootProps = {
       ref: (el) => {this.scope = el},
       className: containerClassName,

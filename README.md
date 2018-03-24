@@ -41,6 +41,8 @@ var TextTruncate = require('react-text-truncate'); // CommonJS or UMD
     Please polyfill `requestAnimationFrame` before you called `<TextTruncated />`
 
 ## Changelog
+
+* 0.13.0 Shows all of the text when `line` is falsely, add `maxCalculateTimes` to prevent infinite loop
 * 0.12.1 Update peerDependencies to support React 16
 * 0.12.0 Added new prop: `textElement` for customize text render
 * 0.11.2 Fix truncate incorrect in small size of width
