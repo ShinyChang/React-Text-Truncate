@@ -216,6 +216,7 @@ export default class TextTruncate extends Component {
       textElement,
       textTruncateChild,
       truncateText,
+      maxCalculateTimes,
       ...props
     } = this.props;
 
