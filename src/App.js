@@ -118,6 +118,12 @@ export class App extends Component {
                         <h5>10. Custom text element</h5>
                         <TextTruncate {...props} textElement={customTextRender} />
                     </div>
+                    <div id='sample-11'>
+                        <h5>11. Bold text</h5>
+                        <div style={{fontWeight: 'bold'}}>
+                        <TextTruncate {...props}/>
+                        </div>
+                    </div>
                 </div>
             </div>
         )
