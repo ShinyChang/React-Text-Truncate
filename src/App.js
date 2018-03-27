@@ -93,13 +93,39 @@ export class App extends Component {
                         <TextTruncate {...props} textTruncateChild={<div>Block level child</div>}/>
                     </div>
                     <div id='sample-6'>
-                        <h5>6. Long words inside a small container</h5>
-                        <div style={{
-                            width: 150
-                        }}><TextTruncate line={3} text="Национал-Большевизм. Сталинская массовая культура и формирование русского национального самосознания (1931-1956)" /></div>
+                        <h5>6. Long words inside a small container (fixed 3 lines and width: 150px)</h5>
+                        <div style={{width: 150, background: '#ccc'}}>
+                            <TextTruncate line={3} text="Национал-Большевизм. Сталинская массовая культура и формирование русского национального самосознания (1931-1956)" />
+                        </div>
+                    </div>
+                    <div id='sample-7'>
+                        <h5>7. Event hook</h5>
+                        <TextTruncate {...props} onCalculated={() => console.log('onCalculated')} onTruncated={() => console.log('onTruncated')}/>
+                    </div>
+                    <div id='sample-8'>
+                        <h5>8. Large concurrent text (fixed 3 lines and width: 200px) <a href="https://github.com/ShinyChang/React-Text-Truncate/issues/53">#53</a></h5>
+                        <div style={{width: 200, background: '#ccc'}}>
+                            <TextTruncate line={3} text="LoremIpsumissimplydummytextoftheprintingand typesettingindustry.fuhefjfvfjfkvjkvhjkjkvhjjhdfvjfhvjvj hfvjvfhjjhfjsfhjf ghj" />
+                        </div>
+                    </div>
+                    <div id='sample-9'>
+                        <h5>9. Non-spaced language (fixed width: 200px)</h5>
+                        <div style={{width: 200, background: '#ccc'}}>
+                            <TextTruncate {...props} text="中文測試中文測試中文測試中文測試中文測試中文測試中文測試中文測試中文測試中文測試中文測試中文測試" />
+                        </div>
+                    </div>
+                    <div id='sample-10'>
+                        <h5>10. Custom text element</h5>
+                        <TextTruncate {...props} textElement={customTextRender} />
                     </div>
                 </div>
             </div>
         )
     }
 }
+
+const customTextRender = ({children}) => {
+    return (
+        <div>{children.split('').reverse().join('')}</div>
+    )
+};
