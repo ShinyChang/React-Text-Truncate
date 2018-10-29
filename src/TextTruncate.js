@@ -129,7 +129,7 @@ export default class TextTruncate extends Component {
     let lastSpaceIndex = -1;
     let ext = '';
     let loopCnt = 0;
-
+    
     while (displayLine-- > 0) {
       ext = displayLine ? '' : truncateText + (childText ? (' ' + childText) : '');
       while (currentPos <= maxTextLength) {
@@ -165,7 +165,7 @@ export default class TextTruncate extends Component {
                 }
                 truncatedText = text.substr(startPos, currentPos);
               } else {
-                currentPos--;
+                currentPos--;  
                 truncatedText = text.substr(startPos, currentPos);
               }
             } else {
@@ -194,14 +194,11 @@ export default class TextTruncate extends Component {
     if (startPos === maxTextLength) {
       return createElement(textElement, props, text);
     }
-
+    
     this.onTruncated();
-    
-    const truncatePosition = (startPos === splitPos ? startPos : currentPos) - 1;
-    
     return (
       <div {...props}>
-        {createElement(textElement, props, text.substr(0, truncatePosition) + truncateText + ' ')}
+        {createElement(textElement, props, text.substr(0, startPos) + truncateText + ' ')}
         {textTruncateChild}
       </div>
     );
