@@ -8,6 +8,7 @@ export default class TextTruncate extends Component {
     line: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]),
     onCalculated: PropTypes.func,
     onTruncated: PropTypes.func,
+    onToggled: PropTypes.func,
     text: PropTypes.string,
     textElement: PropTypes.node,
     textTruncateChild: PropTypes.node,
@@ -54,6 +55,10 @@ export default class TextTruncate extends Component {
       window.cancelAnimationFrame(this.rafId);
     }
     this.rafId = window.requestAnimationFrame(this.update.bind(this))
+  };
+
+  onToggled = (truncated) => {
+    typeof this.props.onToggled === 'function' && setTimeout(() => this.props.onToggled(truncated), 0);
   };
 
   onTruncated = () => {
@@ -105,6 +110,7 @@ export default class TextTruncate extends Component {
 
     // return if all of text can be displayed
     if (scopeWidth >= this.measureWidth(text)) {
+      this.onToggled(false);
       return createElement(textElement, props, text);
     }
 
@@ -192,10 +198,12 @@ export default class TextTruncate extends Component {
     }
 
     if (startPos === maxTextLength) {
+      this.onToggled(false);
       return createElement(textElement, props, text);
     }
     
     this.onTruncated();
+    this.onToggled(true);
     return (
       <div {...props}>
         {createElement(textElement, props, text.substr(0, startPos) + truncateText + ' ')}
