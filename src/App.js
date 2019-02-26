@@ -118,6 +118,12 @@ export class App extends Component {
                         <h5>10. Custom text element</h5>
                         <TextTruncate {...props} textElement={customTextRender} />
                     </div>
+                    <div id='sample-10'>
+                        <h5>11. Custom text element</h5>
+                        <div style={{width: 288, fontSize:16, background: '#ccc'}}>
+                            <TextTruncate {...props} textTruncateChild={undefined} text="甘蔗產地直送甘蔗汁＋四季青，可選擇甜度、冰塊或是熱飲，冷飲皆為700cc、熱飲皆為500cc；另可加價換成鮮奶茶，也可加購(布丁、黑糖珍珠、燕麥、蜂蜜、蘆薈、珍珠、椰果)。餐點圖片僅供參考，餐點狀況以當日實際出餐為主" />
+                        </div>
+                    </div>
                 </div>
             </div>
         )

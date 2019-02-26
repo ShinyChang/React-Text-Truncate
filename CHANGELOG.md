@@ -1,4 +1,6 @@
 ## Changelog
+
+* 0.14.0 Added new event hook: `onToggled`
 * 0.13.1 Fix react warning of `maxCalculateTimes`
 * 0.13.0 Shows all of the text when `line` is falsely, add `maxCalculateTimes` to prevent infinite loop
 * 0.12.1 Update peerDependencies to support React 16
