@@ -196,6 +196,25 @@ export class App extends Component {
                             <TextTruncate {...props} />
                         </div>
                     </div>
+                    <div id="sample-12">
+                        <h5>
+                            12. Issue{" "}
+                            <a href="https://github.com/ShinyChang/React-Text-Truncate/issues/75">
+                                #75
+                            </a>
+                        </h5>
+                        <div className="container">
+                            <TextTruncate
+                                line={1}
+                                truncateText="…"
+                                text={
+                                    "rH2ivGxNu5UX73rt76nLiCjtvwrtg4Tx8orH2ivGxNu5UX73rt76nLiCjtvwrtg4Tx8o"
+                                }
+                                ref="idRef"
+                                containerClassName="address"
+                            />
+                        </div>
+                    </div>
                 </div>
             </div>
         );
