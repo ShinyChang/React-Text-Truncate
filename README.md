@@ -18,6 +18,7 @@ var TextTruncate = require('react-text-truncate'); // CommonJS or UMD
 ```
 <TextTruncate
     line={1}
+    element="span"
     truncateText="…"
     text="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
     textTruncateChild={<a href="#">Read on</a>}
