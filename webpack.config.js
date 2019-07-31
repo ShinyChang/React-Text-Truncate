@@ -2,14 +2,12 @@ var path = require('path');
 var webpack = require('webpack');
 
 module.exports = {
+    mode: 'production',
     devtool: 'source-map',
     entry: path.join(__dirname, 'src', 'index'),
     output: {
         path: path.join(__dirname, 'build'),
         filename: 'bundle.js'
-    },
-    resolve: {
-        extensions: ['', '.js', '.jsx']
     },
     plugins: [
         new webpack.DefinePlugin({
@@ -24,9 +22,9 @@ module.exports = {
         })
     ],
     module: {
-        loaders: [{
+        rules: [{
             test: /\.jsx?$/,
-            loaders: ['babel'],
+            loaders: ['babel-loader'],
             include: path.join(__dirname, 'src')
         }]
     }

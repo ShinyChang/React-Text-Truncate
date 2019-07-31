@@ -2,6 +2,7 @@ var path = require('path');
 var webpack = require('webpack');
 
 module.exports = {
+    mode: 'development',
     devtool: 'eval',
     entry: [
         'webpack-hot-middleware/client',
@@ -12,21 +13,17 @@ module.exports = {
         filename: 'bundle.js',
         publicPath: '/build/'
     },
-    resolve: {
-        extensions: ['', '.js']
-    },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
-        new webpack.NoErrorsPlugin()
     ],
     externals: {
         react: 'React',
         'react-dom': 'ReactDOM',
     },
     module: {
-        loaders: [{
+        rules: [{
             test: /\.jsx?$/,
-            loaders: ['babel'],
+            loaders: ['babel-loader'],
             include: path.join(__dirname, 'src')
         }]
     }
