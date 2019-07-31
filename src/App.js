@@ -35,7 +35,6 @@ export class App extends Component {
         if (appendTextTruncateChild) {
             props.textTruncateChild = <a href="#">Read On</a>;
         }
-
         return (
             <div className="row">
                 <div className="col-md-6 col-xs-12">
