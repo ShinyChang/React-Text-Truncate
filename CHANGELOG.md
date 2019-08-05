@@ -1,5 +1,6 @@
 ## Changelog
 
+- 0.15.0 Update dependencies to fix security issues
 - 0.14.0 Fix console warnings
 - 0.14.0 Added new event hook: `onToggled`
 - 0.13.1 Fix react warning of `maxCalculateTimes`
