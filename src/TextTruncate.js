@@ -206,10 +206,10 @@ export default class TextTruncate extends Component {
     this.onTruncated();
     this.onToggled(true);
     return (
-      <div {...props}>
+      <span {...props}>
         {createElement(textElement, props, text.substr(0, startPos) + truncateText + ' ')}
         {textTruncateChild}
-      </div>
+      </span>
     );
   }
 
