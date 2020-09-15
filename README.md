@@ -8,14 +8,14 @@ npm install react-text-truncate
 
 ## Usage
 
-```
+```js
 import TextTruncate from 'react-text-truncate'; // recommend
 var TextTruncate = require('react-text-truncate'); // CommonJS or UMD
 ```
 
 ## Markup
 
-```
+```jsx
 <TextTruncate
     line={1}
     element="span"
