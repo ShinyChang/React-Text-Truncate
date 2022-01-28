@@ -10,7 +10,7 @@ export default class TextTruncate extends Component {
     onTruncated: PropTypes.func,
     onToggled: PropTypes.func,
     text: PropTypes.string,
-    textElement: PropTypes.node,
+    textElement: PropTypes.elementType,
     textTruncateChild: PropTypes.node,
     truncateText: PropTypes.string,
     maxCalculateTimes: PropTypes.number
