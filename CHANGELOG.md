@@ -1,5 +1,6 @@
 ## Changelog
 
+- 0.18.0 Fix text width not calculate correctly
 - 0.17.0 Support React 17
 - 0.16.0 Change wrapper tag from div to span
 - 0.15.0 Update dependencies to fix security issues
