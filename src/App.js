@@ -214,6 +214,21 @@ export class App extends Component {
                             />
                         </div>
                     </div>
+                    <div id="sample-13">
+                        <h5>
+                            13. Issue{" "}
+                            <a href="https://github.com/ShinyChang/React-Text-Truncate/issues/69">
+                                #69
+                            </a>
+                        </h5>
+                        <div className="container">
+                            <TextTruncate
+                                line={1}
+                                truncateText="...trancated"
+                                text={"V3"}
+                            />
+                        </div>
+                    </div>
                 </div>
             </div>
         );
